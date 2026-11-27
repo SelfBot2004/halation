@@ -2,16 +2,28 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <application android:label="Halation" android:theme="@android:style/Theme.Material.NoActionBar" android:usesCleartextTraffic="true">
+    
+    <application 
+        android:label="Halation" 
+        android:theme="@android:style/Theme.Material.NoActionBar" 
+        android:usesCleartextTraffic="true"
+        android:banner="@android:drawable/ic_menu_view"> <!-- This gives it a fallback TV banner -->
+        
         <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+                <!-- These two lines tell the TV to put the app on the home screen -->
                 <category android:name="android.intent.category.LAUNCHER" />
-<category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".OverlayService" android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" android:exported="true">
-            <intent-filter><action android:name="android.accessibilityservice.AccessibilityService" /></intent-filter>
+        
+        <service android:name=".OverlayService" 
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" 
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
             <meta-data android:name="android.accessibilityservice" android:resource="@xml/accessibility_config" />
         </service>
     </application>
