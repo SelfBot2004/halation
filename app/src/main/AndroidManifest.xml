@@ -3,7 +3,13 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.INTERNET" />
     
-    <application android:label="Halation" android:usesCleartextTraffic="true">
+    <!-- We added android:icon and android:banner here -->
+    <application 
+        android:label="Halation" 
+        android:icon="@drawable/ic_launcher"
+        android:banner="@drawable/tv_banner"
+        android:usesCleartextTraffic="true">
+        
         <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
