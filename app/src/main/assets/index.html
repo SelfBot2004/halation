@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { margin: 0; background: transparent; overflow: hidden; font-family: sans-serif; }
+        /* The CRT Scanline Overlay */
+        #crt-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none; z-index: 1;
+            background: repeating-linear-gradient(to bottom, transparent, transparent 2px, rgba(0,0,0,0.3) 2px, rgba(0,0,0,0.3) 4px);
+        }
+        /* The Top Right Menu */
+        #menu {
+            position: fixed; top: 20px; right: 20px; z-index: 10;
+            background: rgba(0,0,0,0.7); border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 16px; padding: 20px; width: 320px; backdrop-filter: blur(10px);
+            display: none; flex-direction: column; gap: 12px; color: white;
+        }
+        .preset-btn {
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1);
+            padding: 10px; border-radius: 8px; text-align: left; cursor: pointer; transition: 0.2s;
+        }
+        .preset-btn:hover, .preset-btn:focus { background: rgba(255,150,50,0.3); border-color: rgba(255,150,50,0.5); outline: none; }
+        .preset-btn.active { background: rgba(255,150,50,0.5); border-color: rgba(255,150,50,1); }
+    </style>
+</head>
+<body>
+    <div id="crt-overlay"></div>
+
+    <div id="menu">
+        <div class="flex justify-between items-center mb-2">
+            <h2 class="font-bold text-lg">Halation</h2>
+            <button onclick="toggleMenu()" class="text-gray-400 hover:text-white">&times;</button>
+        </div>
+        
+        <div class="flex flex-col gap-2">
+            <button class="preset-btn active" onclick="setPreset('movie', event)">Cinema Classic</button>
+            <button class="preset-btn" onclick="setPreset('anime', event)">Anime Feature</button>
+            <button class="preset-btn" onclick="setPreset('vhs', event)">Retro VHS</button>
+            <button class="preset-btn" onclick="setPreset('clean', event)">Crisp UI</button>
+        </div>
+
+        <div class="mt-4">
+            <label class="text-xs text-gray-400">Scanline Intensity</label>
+            <input type="range" min="0" max="100" value="30" oninput="setIntensity(this.value)" class="w-full mt-1 accent-orange-500">
+        </div>
+    </div>
+
+    <script>
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+            document.getElementById('menu').style.display = isMenuOpen ? 'flex' : 'none';
+        }
+
+        function setPreset(name, event) {
+            document.querySelectorAll('.preset-btn').forEach(btn => btn.classList.remove('active'));
+            if(event) event.target.classList.add('active');
+            
+            const overlay = document.getElementById('crt-overlay');
+            if (name === 'movie') overlay.style.background = 'repeating-linear-gradient(to bottom, transparent, transparent 2px, rgba(0,0,0,0.3) 2px, rgba(0,0,0,0.3) 4px)';
+            if (name === 'anime') overlay.style.background = 'repeating-linear-gradient(to bottom, transparent, transparent 4px, rgba(0,0,0,0.1) 4px, rgba(0,0,0,0.1) 6px)';
+            if (name === 'vhs') overlay.style.background = 'repeating-linear-gradient(to bottom, transparent, transparent 3px, rgba(0,0,0,0.6) 3px, rgba(0,0,0,0.6) 6px)';
+            if (name === 'clean') overlay.style.background = 'none';
+        }
+
+        function setIntensity(val) {
+            document.getElementById('crt-overlay').style.opacity = val / 100;
+        }
+    </script>
+</body>
+</html>
