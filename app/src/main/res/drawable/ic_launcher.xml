@@ -1,0 +1,12 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="320dp" android:height="180dp"
+    android:viewportWidth="320" android:viewportHeight="180">
+    <!-- Black Background -->
+    <path android:fillColor="#000000" android:pathData="M0,0h320v180h-320z"/>
+    <!-- Orange Glow Circle -->
+    <path android:fillColor="#FF9632" android:pathData="M160,40 A50,50 0 1,0 160,140 A50,50 0 1,0 160,40" android:fillAlpha="0.8"/>
+    <!-- Scanlines over the circle -->
+    <path android:fillColor="#000000" android:pathData="M110,55h100v6h-100z M110,75h100v6h-100z M110,95h100v6h-100z M110,115h100v6h-100z"/>
+    <!-- Stylized H -->
+    <path android:fillColor="#FFFFFF" android:pathData="M140,70h8v40h-8z M172,70h8v40h-8z M148,85h24v10h-24z"/>
+</vector>
